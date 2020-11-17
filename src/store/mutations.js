@@ -2,7 +2,10 @@ import {
         USER_INFO,
         SINGLE_SELECT_GOODS,
         REDUCE_GOODS,
-        ADD_GOODS
+        ADD_GOODS,
+        ADD_USER_SHOPPING_ADDRESS,
+        CHANGE_USER_SHOPPING_ADDRESS,
+        DELETE_USER_SHOPPING_ADDRESS
 } from './mutation-type'
 
 import {  Toast } from 'vant'
@@ -80,5 +83,23 @@ export default {
     //没有登录跳转到登录界面
     //   router.push('/login')
     // }
+  },
+  //添加用户地址
+  [ADD_USER_SHOPPING_ADDRESS](state, {
+    content
+  }) {
+    state.shippingAddress = [...state.shippingAddress, content]
+    console.log(state.shippingAddress)
+  },
+  //修改用户地址
+  [CHANGE_USER_SHOPPING_ADDRESS](state,{content}){
+    const index = state.shippingAddress.findIndex(item => item.id === content.id)
+    state.shippingAddress.splice(index, 1, content)
+  },
+  //删除地址
+  [DELETE_USER_SHOPPING_ADDRESS](state, {
+    id
+  }) {
+    state.shippingAddress = state.shippingAddress.filter(item => item.id !== id)
   }
 }

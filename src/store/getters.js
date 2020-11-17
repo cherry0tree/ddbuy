@@ -1,5 +1,6 @@
 import {
-  SELECTED_GOODS_PRICE
+  SELECTED_GOODS_PRICE,
+  SELECTED_GOODS
 } from "./mutation-type";
 
 export default {
@@ -21,5 +22,15 @@ export default {
       }
     })
     return count;
+  },
+  SELECTED_GOODS(state) {
+    let goodsArray = [];
+    let shopCart = state.shopCart;
+    Object.values(shopCart).forEach((goods, index) => {
+      if(goods.checked) {
+        goodsArray.push(shopCart[goods.id])
+      }
+    })
+    return goodsArray;
   }
 }

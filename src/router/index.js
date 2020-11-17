@@ -13,6 +13,9 @@ const Mine = () => import('../views/mine/Mine.vue');
 const Login = () => import('../views/login/Login.vue');
 // 加载订单相关的组件
 const Order = () => import('../views/order/Order.vue');
+const myAddress = () => import('../views/order/children/myAddress.vue');
+const AddAddress = () => import('../views/order/children/children/AddAddress.vue')
+const EditAddress = () => import('../views/order/children/children/EditAddress.vue');
 
 Vue.use(VueRouter)
 
@@ -93,13 +96,39 @@ const routes = [
   },
   {
     // 订单
-    path: '/Order',
+    path: '/order',
     name: 'order',
-    component: Order
+    component: Order,
+    children: [{
+        //我的地址
+        path: 'myAddress',
+        name: 'myAddress',
+        component: myAddress,
+        children: [{
+          path: 'addAddress',
+          name: 'addAddress',
+          component: AddAddress
+        },{
+          path: 'editAddress',
+          name: 'editAddress',
+          component: EditAddress          
+        }]
+    }]
   }
 ]
 
 const router = new VueRouter({
+  // 解决路由跳转页面没有置顶
+  scrollBehavior(to, from, savedPosition) {
+    if (savedPosition) {
+        return savedPosition
+    } else {
+        return {
+            x: 0,
+            y: 0
+        }
+    }
+  },  
   routes
 })
 

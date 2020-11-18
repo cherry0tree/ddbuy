@@ -16,6 +16,9 @@ const Order = () => import('../views/order/Order.vue');
 const myAddress = () => import('../views/order/children/myAddress.vue');
 const AddAddress = () => import('../views/order/children/children/AddAddress.vue')
 const EditAddress = () => import('../views/order/children/children/EditAddress.vue');
+// 地图
+const Map = () => import('../views/home/components/map/Map.vue');
+
 
 Vue.use(VueRouter)
 
@@ -85,6 +88,11 @@ const routes = [
         meta: {
           keepAlive: true
         }                         
+      },
+      {
+        path: 'map',
+        name: 'map',
+        component: Map,
       }
     ]
   },

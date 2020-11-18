@@ -1,2 +1,4 @@
 //选中地址
 export const CHOOSE_USER_ADDRESS = 'CHOOSE_USER_ADDRESS';
+//定位地址
+export const LOCATION_ADDRESS = 'LOCATION_ADDRESS';

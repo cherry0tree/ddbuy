@@ -13,8 +13,9 @@
     <router-link to="/dashboard/map"
                  tag="span"
                  class="address">
-      请选择位置
+      {{location || AdrTip}} 
     </router-link>
+    <svg-icon iconClass="up_real" />
   </div>
   <!-- 搜索框 -->
   <div class="searchWrapper">
@@ -36,12 +37,24 @@
 </template>
 
 <script>
+import { LOCATION_ADDRESS } from '../../../config/pubsub_type'
+import { getLocalStore } from '../../../config/global.js'
+import PubSub from 'pubsub-js'
 export default {
   name: 'Header',
   data() {
     return {
-      showBgColor: false
+      showBgColor: false,
+      AdrTip: '选择地理位置',
+      location: getLocalStore('userLocation')
     }
+  },
+  mounted() {
+    PubSub.subscribe(LOCATION_ADDRESS, (msg, data) => {
+      if(msg == LOCATION_ADDRESS) {
+        this.location = data;
+      }
+    })
   }
 }
 </script>

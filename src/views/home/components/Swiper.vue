@@ -26,7 +26,12 @@ export default {
     swiper,
     swiperSlide
   },
-  data (){
+  computed: {
+    swiper() {
+      return this.$refs.mySwiper.swiper;
+    }
+  },
+  data () {
     return {
       swiperOption: {
         // 进来就加载

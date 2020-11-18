@@ -49,12 +49,31 @@ export default {
       location: getLocalStore('userLocation')
     }
   },
+  methods: {
+    handleScroll() {
+      let that = this;
+      //垂直滚动的值兼容问题
+      let scrollTopE = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+      let screenHeight = window.screen.availHeight
+      if (scrollTopE > 168) {
+        // 添加搜索栏颜色
+        this.showBgColor = true;
+      } else {
+        this.showBgColor = false;
+      }      
+    }
+  },
   mounted() {
     PubSub.subscribe(LOCATION_ADDRESS, (msg, data) => {
       if(msg == LOCATION_ADDRESS) {
         this.location = data;
       }
     })
+    let that = this;
+    that.$nextTick(() => {
+      //监听滚动事件 执行handleScroll
+      window.addEventListener('scroll', that.handleScroll)
+    });
   }
 }
 </script>

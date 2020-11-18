@@ -21,7 +21,7 @@
 </div>
 </template>
 
-<script>
+<script type="text/javascript">
 import Header from './components/Header'
 import Swiper from './components/Swiper'
 import Tip from './components/Tip'
@@ -89,5 +89,8 @@ export default {
     background-image: url("http://518taole.7-orange.cn/backImage.png");
   }
 }
-
+.van-divider {
+  background-color: #f5f5f5;
+  margin: 0;
+}
 </style>

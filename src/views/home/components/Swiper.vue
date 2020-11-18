@@ -2,7 +2,8 @@
 <!-- 外面不能再包裹一个div否则可能出现播到最后一张图片不能播的情况 -->
   <swiper id="swiper"
           :options="swiperOption"
-          ref="mySwiper">
+          ref="mySwiper"
+          v-if="data_list.length">
     <swiper-slide v-for="(item,index) in data_list"
                   :key="item.public_id">
       <img :src="item.icon_url" :alt="item.public_name">
@@ -26,11 +27,6 @@ export default {
     swiper,
     swiperSlide
   },
-  computed: {
-    swiper() {
-      return this.$refs.mySwiper.swiper;
-    }
-  },
   data () {
     return {
       swiperOption: {
@@ -42,7 +38,7 @@ export default {
         loop: true,
         //配置自动播放
         autoplay: {
-          delay: 3000,
+          delay: 2900,
           // 最后一个是否停止
           stopOnLastSlide: false,
           // 用户操作swiper之后，是否禁止autoplay
@@ -63,16 +59,16 @@ export default {
   }
 }
 </script>
-<style scoped lang="less">
+<style scoped>
 #swiper {
   padding-top: 6rem;
   width: 95%;
   height: 10rem;
   border-radius: 1rem;
-  img{
-    width: 100%;
-    height: 100%;
-  }
+}
+#swiper img{
+  width: 100%;
+  height: 100%;
 }
 
 </style>

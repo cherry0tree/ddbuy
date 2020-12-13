@@ -1,23 +1,26 @@
 <template>
 <div class="Home">
-  <div class="head">
-    <Header></Header>
-    <Swiper :data_list="data_list"></Swiper>
-    <Tip :home_ad="home_ad"></Tip>
-  </div>
-  <Navigation :nav_list="nav_list"></Navigation>
-  <!-- 跳转到会员界面 -->
-  <VipTip></VipTip>
-  <!-- 限时抢购 -->
-  <FlashBuy :flash_sale_product_list="flash_sale_product_list"></FlashBuy>
-  <!-- 特色专区 -->
-  <SpecialZone :specialZone="specialZone"></SpecialZone>
-  <!--TabbarItem 商品 -->
-  <TabbarGoodsItem :tabbar_all_product_list="tabbar_all_product_list"
-                   :flash_sale_product_list="flash_sale_product_list"></TabbarGoodsItem>
-  <!-- 最底部 -->
-  <van-divider>我是有底线的</van-divider>
-
+  
+    <div class="head">
+      <Header></Header>
+      <Swiper :data_list="data_list"></Swiper>
+      <Tip :home_ad="home_ad"></Tip>
+    </div>
+    <Navigation :nav_list="nav_list"></Navigation>
+    <!-- 跳转到会员界面 -->
+    <VipTip></VipTip>
+    <!-- 限时抢购 -->
+    <div v-if="!isLoadingFinished">
+      <FlashBuy :flash_sale_product_list="flash_sale_product_list"></FlashBuy>
+    </div>
+    <!-- 特色专区 -->
+    <SpecialZone :specialZone="specialZone"></SpecialZone>
+    <!--TabbarItem 商品 -->
+    <TabbarGoodsItem :tabbar_all_product_list="tabbar_all_product_list"
+                    :flash_sale_product_list="flash_sale_product_list"></TabbarGoodsItem>
+    <!-- 最底部 -->
+    <van-divider>我是有底线的</van-divider>
+  
 </div>
 </template>
 
@@ -52,6 +55,7 @@ export default {
   data (){
     return {
       data_list: [], // 首页轮播图数据
+      isLoadingFinished: true,
       home_ad: '', // 首页广告
       nav_list: [], //导航数据
       flash_sale_product_list: [], // 限时抢购
@@ -65,6 +69,7 @@ export default {
       console.log(response.data)
       if (response.success) {
          const data = response.data
+         isLoadingFinished = false
          this.data_list = data.list[0].icon_list
          this.home_ad = data.home_ad.image_url
          this.nav_list = data.list[2].icon_list

@@ -29,31 +29,31 @@ export default {
     flash_sale_product_list: Array
   },
   mounted () {
-    // this.$nextTick(() => {
-    //   let contentWrapperWidth = 0;
-    //   console.log(this.$refs)
-    //   let el = this.$refs.productItem;
-    //   console.log(el)
-    //   for (let i = 0; i < el.length; i++) {
-    //     contentWrapperWidth += el[i].clientWidth;
-    //   }
-    //   // 给ul设置值
-    //   this.$refs.ulWrapper.style.width = contentWrapperWidth + 'px';      
-    //   console.log(this.$refs.ulWrapper.style.width)
-    //   if (!this.scroll) {
-    //     // 名字一定要唯一 和父组件独立
-    //     this.scroll = new BScroll('.flashItemWrapper', {
-    //       probeType: 2,
-    //       startX: 0,
-    //       click: true,
-    //       scrollX: true,
-    //       scrollY: false,
-    //       eventPassthrough: "vertical",
-    //     });
-    //   } else {
-    //     this.scroll.refresh();
-    //   }      
-    // })
+    this.$nextTick(() => {
+      let contentWrapperWidth = 0;
+      console.log(this.$refs)
+      let el = this.$refs.productItem;
+      console.log(el)
+      for (let i = 0; i < el.length; i++) {
+        contentWrapperWidth += el[i].clientWidth;
+      }
+      // 给ul设置值
+      this.$refs.ulWrapper.style.width = contentWrapperWidth + 'px';      
+      console.log(this.$refs.ulWrapper.style.width)
+      if (!this.scroll) {
+        // 名字一定要唯一 和父组件独立
+        this.scroll = new BScroll('.flashItemWrapper', {
+          probeType: 2,
+          startX: 0,
+          click: true,
+          scrollX: true,
+          scrollY: false,
+          eventPassthrough: "vertical",
+        });
+      } else {
+        this.scroll.refresh();
+      }      
+    })
   }
 }
 </script>

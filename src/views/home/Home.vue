@@ -69,7 +69,7 @@ export default {
       console.log(response.data)
       if (response.success) {
          const data = response.data
-         isLoadingFinished = false
+         this.isLoadingFinished = false
          this.data_list = data.list[0].icon_list
          this.home_ad = data.home_ad.image_url
          this.nav_list = data.list[2].icon_list
